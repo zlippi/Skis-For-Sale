@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -27,10 +29,13 @@ public class Main extends Application{
 		dataGet = new DataGetter();
 		primaryStage.setTitle("Skis");
 		
-		String[] skiData = dataGet.getFileData("Skis.csv");
-		
+		ArrayList<Ski> skis = dataGet.getFileData("Skis.csv");
+		String[] skiData = new String[skis.size()];
+		for (int i = 0; i < skis.size(); i++) {
+			skiData[i] = skis.get(i).toString();
+		}
 		skiView = new ListView<String>();
-		skiView.getItems().addAll(skiData.);
+		skiView.getItems().addAll(skiData);
 		skiView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
 		skiView.setPrefSize(120, 120);
 		StackPane layout = new StackPane();
