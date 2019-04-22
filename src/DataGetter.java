@@ -8,34 +8,31 @@ import java.util.ArrayList;
 
 public class DataGetter {
 	private String[] data;
-	private ArrayList<Ski> skis;
-	
+	private ArrayList<String> rawData;
+
 	public DataGetter() {
-		skis = new ArrayList<Ski>();
+		rawData = new ArrayList<String>();
 	}
-	
-	
-	
-	
-	public ArrayList<Ski> getFileData(String fileDir) throws IOException {
+
+	public String[] getFileData(String fileDir) throws IOException {
+
 		BufferedReader bfr = new BufferedReader(new FileReader(fileDir));
 		String line = "";
-		while ((line += bfr.readLine()) != null) {
+		
+		while ((line = bfr.readLine()) != null) {
+			rawData.add(line);
 		}
-		data = line.split(",");
+		
+		data = new String[rawData.size()];
+		for (int i = 0; i < rawData.size(); i++) {
+			data[i] = rawData.get(i);
+		}
+		
+		
 		
 		
 		bfr.close();
-		if (data.length % 8 == 0) {
-			for (int i = 0; i < (data.length / 8); i++) {
-				skis.add(new Ski(data[i], data[i + 1], data[i + 2], data[i + 3], data[i + 4], Integer.parseInt(data[i + 5]), Integer.parseInt(data[i + 6]), Double.parseDouble(data[i + 7])));
-				return skis;
-			}
-		}else {
-			System.out.println("Error has occured! getFileData() method's data not divisible by 8!");
-			return null;
-		}
-		return null;
+		return data;
 	}
-	
+
 }

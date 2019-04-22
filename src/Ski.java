@@ -1,9 +1,3 @@
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
 import java.util.ArrayList;
 
 public class Ski {
@@ -14,6 +8,7 @@ public class Ski {
 	private int position, listPosition;
 	private double price;
 	private ArrayList<String> data;
+	private String[] stringData;
 	
 	public Ski() {
 		data = new ArrayList<String>();
@@ -37,8 +32,24 @@ public class Ski {
 		data.add(String.valueOf(listPosition));
 		price = thePrice;
 		data.add(String.valueOf(price));
+		stringData = new String[data.size()];
+		for (int i = 0; i < data.size(); i++) {
+			stringData[i] = data.get(i);
+		}
 	}
 	
+	
+	
+	public String[] toStringArray() {
+		 return stringData;
+	}
+	
+	@Override
+	public String toString() {
+		 String theReturn = "ID: " + id + " Configurable: " + configurable + " Name: " + name + " Category: " + category + " List: " + list + " Position: " + String.valueOf(position) + " ListPosition: " + String.valueOf(listPosition) + " Price: " + String.valueOf(price);
+		 theReturn = theReturn.replace(",", "");
+		 return theReturn;
+	}
 
 // Below are getters and setters!
 	
